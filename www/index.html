@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" manifest="presentation.manifest">
+<head>
+	<meta charset="UTF-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name = "viewport" content = "user-scalable=no, width=device-width">
+	<title>Presentation</title>
+
+<!-- Styles -->
+<style>
+
+
+*, * * {
+	box-sizing: border-box;
+}
+
+body {
+	/*iPad dimensions*/
+	width: 1010px;
+	height: 660px;
+	font-family: 'Helvetica', 'Roboto', sans-serif;
+	font-size: 1em;
+}
+
+.container {
+	max-width: 1010px;
+	max-height: 660px;
+
+	overflow: hidden;
+}
+
+.map {
+	max-width: 1010px;
+	max-height: 660px;
+
+	position: relative;
+}
+
+.map img {
+	display: block;
+	max-width: 100%;
+	margin: 0 auto;
+	/* position: absolute;
+	top: 0;
+	left: 0; */
+}
+
+#map_image {
+	transition: 		All 500ms linear;
+	-webkit-transition: All 500ms linear;
+	-moz-transition: 	All 500ms linear;
+	-o-transition: 		All 500ms linear;
+	transform-origin: 			0 0 0;
+	-webkit-transform-origin: 	0 0 0;
+	-moz-transform-origin: 		0 0 0;
+	-o-transform-origin: 		0 0 0;
+}
+
+.map .marker {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	background: rgba(255, 0, 0, 0.4);
+	width: 100px;
+	height: 100px;
+
+	border-radius: 100%;
+
+	transition: 		All 200ms ease;
+	-webkit-transition: All 200ms ease;
+	-moz-transition: 	All 200ms ease;
+	-o-transition: 		All 200ms ease;
+}
+
+.window {
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 2%;
+
+	position: absolute;
+	top: -100%;
+	left: 50%;
+
+	/*width: 950px;
+	height: 600px;*/
+	width: 760px;
+	height: 636px;
+	overflow: hidden;
+
+	transform: translate(-50%, 1%);
+
+	transition: 		All 200ms ease;
+	-webkit-transition: All 200ms ease;
+	-moz-transition: 	All 200ms ease;
+	-o-transition: 		All 200ms ease;
+}
+
+.window.window--open {
+	top: 0;
+}
+
+.window h1 {
+	text-align: center;
+}
+
+.window img {
+	max-width: 100%;
+}
+
+.close_link {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	width: 90px;
+	height: 90px;
+
+	background: url('img/close_link.png');
+}
+
+.more_link {
+	position: absolute;
+	bottom: 50px;
+	right: 0;
+
+	width: 100px;
+	height: 100px;
+
+	background: url('img/more_link.png');
+}
+
+.debug_center {
+	background: #000;
+	width: 3px;
+	height: 3px;
+
+	position: absolute;
+	top:  calc(50% - 5px);
+	left: calc(50% - 5px);
+
+	display: none;
+}
+
+.debug {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 80px;
+
+	font-size: 12px;
+	font-family: monospace;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+
+	z-index: 999999;
+	pointer-events: none;
+
+	display: none;
+}
+</style>
+
+</head>
+<body>
+	<!-- <div class="debug" id="debug"> -->
+		
+	</div>
+	<div class="container">
+		<div class="map">
+			<img src="img/map.jpg" id="map_image">
+			<a href="#win1" class="marker" 	data-x="40" 	data-y="509"></a>
+			<a href="#win2" class="marker" 	data-x="167" 	data-y="510"></a>
+			<a href="#win2" class="marker" 	data-x="385" 	data-y="303"></a>
+			<a href="#win3" class="marker" 	data-x="270" 	data-y="80"></a>
+			<a href="#win4" class="marker" 	data-x="410" 	data-y="550"></a>
+			<a href="#win5" class="marker" 	data-x="410" 	data-y="550"></a>
+			<a href="#win6" class="marker" 	data-x="410" 	data-y="550"></a>
+			<a href="#win7" class="marker" 	data-x="410" 	data-y="550"></a>
+			<a href="#win8" class="marker" 	data-x="410" 	data-y="550"></a>
+			<a href="#win9" class="marker" 	data-x="410" 	data-y="550"></a>
+			<a href="#win10" class="marker" data-x="410" 	data-y="550"></a>
+			<a href="#win11" class="marker" data-x="410" 	data-y="550"></a>
+			<a href="#win12" class="marker" data-x="410" 	data-y="550"></a>
+			<a href="#deb" class="marker" id="debugMarker" data-x="0" data-y="0"></a>
+			<div class="debug_center"></div>
+		</div>
+		<div class="windows">
+			<div id="win1" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_CPA1.png" alt="">
+				<a href="http://opterna.com/products-solutions/multiopt-cpa/" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win2" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_CTPA1.png" alt="">
+				<a href="http://opterna.com/products-solutions/multiopt-ctp/" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win3" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_Pole-Mount-1000w.png" alt="">
+				<a href="http://opterna.com/products-solutions/turnopt-1000w-low-density-fiber-distribution-hub/" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win4" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_DOpt1.png" alt="">
+				<a href="http://opterna.com/products-solutions/mtusfu-solutions/" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win5" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_DOpt2.png" alt="">
+				<a href="#" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win6" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_MTCA1.png" alt="">
+				<a href="#" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win7" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_ODB1.png" alt="">
+				<a href="#" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win8" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_OSB1.png" alt="">
+				<a href="#" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win9" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_OSB2.png" alt="">
+				<a href="#" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win10" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_Pedestal-Mount-1000w.png" alt="">
+				<a href="#" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win11" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_TPA1.png" alt="">
+				<a href="#" target="_blank" class="more_link"></a>
+			</div>
+			<div id="win12" class="window">
+				<a href="#map" class="close_link"></a>
+				<img src="img/Box_MTCA.png" alt="">
+				<a href="#" target="_blank" class="more_link"></a>
+			</div>
+		</div>
+	</div>
+<!-- SCRIPTS -->
+<script>
+/*=============================================
+KALI
+
+	@by cav_dan
+
+	$()
+	Kali: not jquery, but enough for me!
+	@args
+		string selector -> a css like selector.
+			returns single object OR array of objects
+	@methods
+		.each(function(element object){});
+==============================================*/
+var $ = function(selector) {
+	var selectorResults = document.querySelectorAll(selector);
+
+	var kali = selectorResults.length > 1 ? selectorResults : selectorResults[0];
+	if (kali != undefined)
+	{
+		//$.each()
+		kali.each = function(whatToDo) {
+			for (var el = this.length - 1; el >= 0; el--) {
+				whatToDo(this[el]);
+			}
+		}
+		return kali;
+	}
+
+	return false;
+};
+
+var map_image = $('#map_image');
+
+function markerClick()
+{
+	var el = this;
+	var href = el.href;
+	var win = href.substring(href.indexOf('#'), href.length);
+
+	$('.marker').each(function(marker){
+		marker.style.opacity = '0';
+	})
+	
+	var ZoomdimgW = 2525,
+		ZoomdimgH = 1671;
+	
+	window.setTimeout(function(){
+		var x = (( (+el.dataset.x * 2.5) + 50) * -1) + (ZoomdimgW / 10) + 50 ;
+		var y = (( (+el.dataset.y * 2.5) + 50) * -1) + (ZoomdimgH / 10) + 250 ;
+		map_image.style.transform = 'translate('+y+'px, '+x+'px) scale(2.5, 2.5)';
+	}, 200);
+	
+	window.setTimeout(function(){
+		$(win).className = 'window window--open';
+	}, 1000);
+}
+
+//Execution
+$('.marker').each(function(el) {
+	el.addEventListener('click', markerClick);
+	el.style.top = el.dataset.x + 'px';
+	el.style.left = el.dataset.y + 'px';
+});
+
+$('.close_link').each(function(el){
+	el.addEventListener('click', function(){
+		this.parentElement.className = 'window';
+
+
+		window.setTimeout(function(){
+			map_image.style.transformOrigin = el.dataset.x + 'px ' + el.dataset.y + 'px 0px';
+			map_image.style.transform = 'translate(0px, 0px) scale(1, 1)';
+
+			window.setTimeout(function(){
+				$('.marker').each(function(marker){
+					marker.style.opacity = '1';
+				});	
+			}, 600);
+		}, 200);
+	})
+})
+
+//debug 
+// $('.map').addEventListener('mousemove', function(event) {
+// 	$('#debug').innerHTML = event.clientY + "  " + event.clientX;
+// 	$('#debugMarker').style.left = event.clientX + 'px';
+// 	$('#debugMarker').style.top = event.clientY + 'px';
+// })
+
+</script>
+
+</body>
+</html>
